@@ -51,14 +51,11 @@ func main() {
 			continue
 		}
 
-		fmt.Println(fieldType.Name)
 		gqlType := graphql.NewObject(graphql.ObjectConfig{
 			Name:   fieldType.Name,
 			Fields: fields,
 		})
 
-		a := getMethod.Type.String()
-		_ = a
 		rootFields[fieldType.Name] = &graphql.Field{
 			Type:        gqlType,
 			Description: "",
@@ -72,8 +69,6 @@ func main() {
 				if !ok {
 					return nil, fmt.Errorf("couldn't cast id to string")
 				}
-
-				fmt.Println(getMethod.Type)
 
 				getMethod.Func.Call([]reflect.Value{field, reflect.ValueOf(id), reflect.New(getMethod.Type.In(2).Elem())})
 				return nil, nil
