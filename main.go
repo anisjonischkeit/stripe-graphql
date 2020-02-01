@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"net/http"
+	"os"
 	"reflect"
 
 	"github.com/graphql-go/graphql"
@@ -20,7 +21,12 @@ func main() {
 		"float64": graphql.Float,
 	}
 
-	client := client.New("", nil)
+	secretKey := os.Getenv("STRIPE_SECRET_KEY")
+	if secretKey == "" {
+		panic("Please set the STRIPE_SECRET_KEY environment variable")
+	}
+
+	client := client.New(secretKey, nil)
 	re := reflect.Indirect(reflect.ValueOf(client))
 
 	for i := 0; i < re.NumField(); i++ {
