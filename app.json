@@ -1,0 +1,6 @@
+{
+  "name": "Stripe GraphQL",
+  "description": "A GraphQL interface for stripe",
+  "repository": "https://github.com/anisjonischkeit/stripe-graphql",
+  "keywords": ["go", "stripe", "graphql", "generated", "autogen"]
+}
