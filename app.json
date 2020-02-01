@@ -7,5 +7,10 @@
     "STRIPE_SECRET_KEY": {
       "description": "Secret key for your Stripe account."
     }
-  }
+  },
+  "buildpacks": [
+    {
+      "url": "heroku/go"
+    }
+  ]
 }
