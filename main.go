@@ -70,8 +70,15 @@ func main() {
 					return nil, fmt.Errorf("couldn't cast id to string")
 				}
 
-				getMethod.Func.Call([]reflect.Value{field, reflect.ValueOf(id), reflect.New(getMethod.Type.In(2).Elem())})
-				return nil, nil
+				returns := getMethod.Func.Call([]reflect.Value{field, reflect.ValueOf(id), reflect.New(getMethod.Type.In(2).Elem())})
+
+				ret1 := returns[0].Interface()
+				var ret2 error
+				if !returns[1].IsNil() {
+					ret2 = returns[1].Interface().(error)
+					ret1 = nil
+				}
+				return ret1, ret2
 			},
 		}
 	}
